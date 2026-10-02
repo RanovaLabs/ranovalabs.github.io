@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="iOS developer and fintech engineer in Cheltenham, UK. Apps shipped in 2026 with Claude Code, and a decade of mobile banking and payments work.">
+<meta property="og:title" content="Kasun Manimel Wadu">
+<meta property="og:description" content="iOS developer and fintech engineer. Apps shipped in 2026 with Claude Code.">
+<meta property="og:type" content="website">
+<title>Kasun Manimel Wadu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: one long left-aligned column of dated entries, like a build log.
+     Palette: cool paper, near-black ink, a single amber point (the Ranova Labs dot).
+     Type: Bricolage Grotesque for headlines, Instrument Sans for reading, JetBrains Mono for dates and labels. */
+  :root {
+    --bg: #F5F6F3;
+    --surface: #FFFFFF;
+    --ink: #16171A;
+    --ink-2: #4B4E53;
+    --ink-3: #777A7F;
+    --rule: #DCDED8;
+    --amber: #B87A1E;
+    --amber-soft: rgba(184, 122, 30, .12);
+    --live: #2C6A4D;
+    --live-soft: rgba(44, 106, 77, .11);
+    --bar: #16171A;
+    --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+    --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121314; --surface: #1A1B1D; --ink: #ECEBE6; --ink-2: #B4B3AC; --ink-3: #85847D;
+      --rule: #2C2D2F; --amber: #E0A84A; --amber-soft: rgba(224, 168, 74, .14);
+      --live: #6FBF97; --live-soft: rgba(111, 191, 151, .13); --bar: #ECEBE6;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121314; --surface: #1A1B1D; --ink: #ECEBE6; --ink-2: #B4B3AC; --ink-3: #85847D;
+    --rule: #2C2D2F; --amber: #E0A84A; --amber-soft: rgba(224, 168, 74, .14);
+    --live: #6FBF97; --live-soft: rgba(111, 191, 151, .13); --bar: #ECEBE6;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration-color: var(--amber); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  a:hover { color: var(--amber); }
+  a:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); }
+  .mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* top bar */
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 17px; text-decoration: none; }
+  .brand i { width: 9px; height: 9px; border-radius: 50%; background: var(--amber); display: block; }
+  .nav { display: flex; gap: clamp(14px, 3vw, 28px); flex-wrap: wrap; justify-content: flex-end; }
+  .nav a { font-size: 14px; color: var(--ink-2); text-decoration: none; }
+  .nav a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--amber); }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 72px); padding-block: clamp(36px, 7vw, 84px) clamp(48px, 7vw, 88px); align-items: end; }
+  .hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.7rem); line-height: 1.02; margin-block: 14px 22px; }
+  .hero .lede { font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--ink-2); max-width: 46ch; }
+  .hero .meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 26px; }
+
+  .ledger { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 22px 22px 18px; min-width: 0; }
+  .ledger h2 { font-size: 15px; letter-spacing: 0; margin-bottom: 4px; }
+  .ledger .sub { font-size: 13px; color: var(--ink-3); margin-bottom: 20px; }
+  .lrow { display: grid; grid-template-columns: 78px minmax(0, 1fr) 62px; gap: 12px; align-items: center; padding-block: 9px; border-top: 1px solid var(--rule); }
+  .lrow .name { font-weight: 600; font-size: 14px; }
+  .lrow .days { font-family: var(--font-mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
+  .track { position: relative; height: 12px; }
+  .track::before { content: ""; position: absolute; inset: 5px 0 5px 0; background: var(--rule); }
+  .track b { position: absolute; left: 0; top: 0; height: 12px; background: var(--bar); border-radius: 2px; }
+  .track b.open { background: repeating-linear-gradient(90deg, var(--ink-3) 0 5px, transparent 5px 9px); opacity: .8; }
+  .axis { display: grid; grid-template-columns: 78px minmax(0, 1fr) 62px; gap: 12px; margin-top: 4px; }
+  .axis div { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); }
+  .ledger .note { margin-top: 14px; font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+
+  /* sections */
+  section.block { padding-block: clamp(40px, 6vw, 72px); border-top: 1px solid var(--rule); }
+  .sec-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: clamp(24px, 4vw, 40px); max-width: 62ch; }
+  .sec-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.1; }
+  .sec-head p { color: var(--ink-2); }
+
+  /* project entries */
+  .entry { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(16px, 4vw, 48px); padding-block: 30px; border-top: 1px solid var(--rule); }
+  .entry:first-of-type { border-top: 0; padding-top: 0; }
+  .entry .side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; width: fit-content; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .04em; padding: 4px 10px 4px 9px; border-radius: 999px; background: var(--amber-soft); color: var(--ink); }
+  .chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+  .chip.live { background: var(--live-soft); }
+  .chip.live::before { background: var(--live); }
+  .chip.exp { background: transparent; border: 1px solid var(--rule); }
+  .chip.exp::before { background: var(--ink-3); }
+  .entry .when { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
+  .entry h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.1; margin-bottom: 10px; }
+  .entry p { color: var(--ink-2); max-width: 62ch; }
+  .entry p + p { margin-top: 10px; }
+  .entry .facts { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; max-width: 62ch; }
+  .entry .facts li { position: relative; padding-left: 18px; font-size: 15px; color: var(--ink-2); }
+  .entry .facts li::before { content: ""; position: absolute; left: 0; top: .72em; width: 8px; height: 1.5px; background: var(--amber); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .tags span { font-family: var(--font-mono); font-size: 11.5px; padding: 3px 9px; border: 1px solid var(--rule); border-radius: 6px; color: var(--ink-2); }
+  .links { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 16px; font-size: 14px; font-weight: 500; }
+  .entry.small h3 { font-size: 1.3rem; }
+
+  /* working with AI */
+  .practice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 5vw, 64px); }
+  .practice li { padding-block: 20px; border-top: 1px solid var(--rule); min-width: 0; }
+  .practice h3 { font-size: 1.1rem; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .practice p { color: var(--ink-2); font-size: 15px; }
+
+  /* experience */
+  .twocol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 5vw, 64px); }
+  .twocol h3 { font-size: 1.15rem; margin-bottom: 14px; }
+  .role { padding-block: 16px; border-top: 1px solid var(--rule); }
+  .role strong { display: block; font-weight: 600; }
+  .role .mono { display: block; margin-block: 2px 6px; }
+  .role p { color: var(--ink-2); font-size: 15px; }
+  .work { padding-block: 14px; border-top: 1px solid var(--rule); }
+  .work strong { font-weight: 600; }
+  .work p { color: var(--ink-2); font-size: 15px; }
+  .award { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 12px; padding-block: 12px; border-top: 1px solid var(--rule); font-size: 15px; }
+  .award .mono { padding-top: 3px; }
+  .award span.role-note { display: block; color: var(--ink-2); font-size: 14px; }
+
+  /* skills */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 28px 32px; }
+  .skills h3 { font-size: 1rem; margin-bottom: 10px; }
+  .skills li { padding-block: 3px; font-size: 15px; color: var(--ink-2); }
+
+  /* contact */
+  .contact { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: start; }
+  .contact h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.08; }
+  .contact p { color: var(--ink-2); margin-top: 14px; max-width: 52ch; }
+  .reach li { padding-block: 12px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .reach a { font-weight: 500; overflow-wrap: anywhere; }
+
+  footer { padding-block: 32px 56px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: minmax(0, 1fr); }
+    .contact { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .entry { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .entry .side { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+    .practice, .twocol { grid-template-columns: minmax(0, 1fr); }
+    .nav a:nth-child(n+4) { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    a { transition: color .15s ease; }
+  }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top"><i aria-hidden="true"></i>Kasun Manimel Wadu</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#shipped">Shipped</a>
+      <a href="#ai">With AI</a>
+      <a href="#fintech">Fintech</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-h">
+      <div>
+        <div class="mono">iOS developer &middot; fintech &middot; Cheltenham, UK</div>
+        <h1 id="hero-h">I build iPhone apps and ship them.</h1>
+        <p class="lede">Ten years in software, five of them in mobile banking, payments and insurance. Since August I have been building my own apps with Claude Code. Two are on the App Store and a third is being prepared.</p>
+        <div class="meta">
+          <a href="#shipped">See what I shipped</a>
+          <a href="#contact">Get in touch</a>
+        </div>
+      </div>
+
+      <aside class="ledger" aria-labelledby="ledger-h">
+        <h2 id="ledger-h">First commit to App Store</h2>
+        <p class="sub">Calendar days, from git history and the public listing.</p>
+        <div class="lrow">
+          <span class="name">Chalkline</span>
+          <div class="track" role="img" aria-label="Chalkline, 8 days"><b style="width: 32%"></b></div>
+          <span class="days">8 d</span>
+        </div>
+        <div class="lrow">
+          <span class="name">Tally</span>
+          <div class="track" role="img" aria-label="Tally, 18 days"><b style="width: 72%"></b></div>
+          <span class="days">18 d</span>
+        </div>
+        <div class="lrow">
+          <span class="name">Afterwards</span>
+          <div class="track" role="img" aria-label="Afterwards, 23 days so far, not released yet"><b class="open" style="width: 92%"></b></div>
+          <span class="days">23 d+</span>
+        </div>
+        <div class="axis" aria-hidden="true">
+          <span></span>
+          <div><span>0</span><span>25 days</span></div>
+          <span></span>
+        </div>
+        <p class="note">Afterwards is still in preparation, so its bar is open. Counted to 2 October 2026.</p>
+      </aside>
+    </section>
+
+    <section class="block" id="shipped" aria-labelledby="shipped-h">
+      <div class="sec-head">
+        <div class="mono">2026 &middot; built with Claude Code</div>
+        <h2 id="shipped-h">What I have shipped</h2>
+        <p>Five projects since late August, from my own studio, Ranova Labs. The apps have tests where they pay for themselves and a real release process behind them.</p>
+      </div>
+
+      <article class="entry">
+        <div class="side">
+          <span class="chip live">Live on the App Store</span>
+          <span class="when">Sep 2026 &middot; v1.1</span>
+        </div>
+        <div>
+          <h3>Tally: Family Rewards</h3>
+          <p>A parenting app where adults log a child's good and bad moments, each one moves a points balance, and the balance is spent on goals the child is working toward. Warm and simple on purpose.</p>
+          <ul class="facts">
+            <li>Siri commands to log a moment or check stars. Logging needs Face ID or a passcode, so a child cannot talk the phone into awarding points.</li>
+            <li>iCloud sync, a Kid Mode with its own PIN, an App Lock, and backups as plain JSON.</li>
+            <li>Six languages, an optional Plus subscription through RevenueCat, and crash reporting.</li>
+            <li>In TestFlight now: a Home Screen widget, Control Center controls, and optional photo proof for chores.</li>
+          </ul>
+          <div class="tags"><span>SwiftUI</span><span>SwiftData</span><span>CloudKit</span><span>App Intents</span><span>WidgetKit</span><span>RevenueCat</span></div>
+          <div class="links">
+            <a href="https://apps.apple.com/gb/app/tally-family-rewards/id6808044470">App Store</a>
+            <a href="https://ranovalabs.github.io/tally/">Website</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="side">
+          <span class="chip live">Live on the App Store</span>
+          <span class="when">Sep 2026 &middot; v1.0</span>
+        </div>
+        <div>
+          <h3>Chalkline: Site Photo Log</h3>
+          <p>A job-site camera for contractors. Every photo is stamped with the job, time, street address and GPS position, and a whole job exports as one PDF you can hand to a client, an adjuster or a lawyer. The app is a camera. The report is the product.</p>
+          <ul class="facts">
+            <li>Each photo gets a SHA-256 fingerprint at capture. The report prints it, and the app shows whether a photo is verified, altered or has no fingerprint on record.</li>
+            <li>Stamps are applied on export, so originals stay untouched. Annotations are stored as vectors for the same reason.</li>
+            <li>Client sign-off on the device, an on-site banner when you arrive at a job, and a Shortcuts action for the Action button.</li>
+            <li>Twelve languages, free and Pro tiers with StoreKit 2, 30 tests, and no third-party dependencies.</li>
+          </ul>
+          <div class="tags"><span>Swift 6</span><span>SwiftData</span><span>CloudKit</span><span>StoreKit 2</span><span>MetricKit</span><span>PDF rendering</span></div>
+          <div class="links">
+            <a href="https://apps.apple.com/gb/app/chalkline-site-photo-log/id6809125738">App Store</a>
+            <a href="https://ranovalabs.github.io/chalkline/">Website</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="side">
+          <span class="chip">Preparing for release</span>
+          <span class="when">Sep 2026</span>
+        </div>
+        <div>
+          <h3>Afterwards: Estate Checklist</h3>
+          <p>When someone dies, nobody hands you a list. Afterwards is fifty-two steps for settling an estate in England and Wales, in the order they happen, with the deadlines that carry a penalty marked clearly. Nothing you enter leaves the phone.</p>
+          <ul class="facts">
+            <li>The content is a separate project. Every claim carries a source link and a checked date, and a validator fails the build if one is missing.</li>
+            <li>Corrections reach people through a content feed that is checked against a SHA-256 hash before it touches a checklist, so a factual fix does not wait for App Review.</li>
+            <li>One-time purchase after three free sections, with more than a hundred automated tests.</li>
+          </ul>
+          <div class="tags"><span>SwiftUI</span><span>StoreKit 2</span><span>Swift Package</span><span>Python tooling</span><span>YAML content</span></div>
+          <div class="links">
+            <a href="https://estateadmin.app/">Website</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry small">
+        <div class="side">
+          <span class="chip">Built, not published</span>
+          <span class="when">Oct 2026</span>
+        </div>
+        <div>
+          <h3>Tally for Android</h3>
+          <p>The Tally app ported to Kotlin and Jetpack Compose in a single session. It keeps the same seven-table data model, and its backup format is shared with iOS, so a family can move a backup between platforms.</p>
+          <div class="tags"><span>Kotlin</span><span>Jetpack Compose</span><span>Room</span><span>Glance widget</span><span>WorkManager</span><span>BiometricPrompt</span></div>
+        </div>
+      </article>
+
+      <article class="entry small">
+        <div class="side">
+          <span class="chip exp">Personal experiment</span>
+          <span class="when">Sep 2026</span>
+        </div>
+        <div>
+          <h3>AirPlay TV</h3>
+          <p>An Android TV app that turns the TV into an AirPlay receiver for iPhone, iPad and Mac. It mirrors the screen with hardware H.264 decoding, plays music-only AirPlay, and casts video through ExoPlayer. Android has no ALAC decoder, so I wrote one in pure Java and tested it bit-exact against Apple's encoder.</p>
+          <p>It builds on the open-source <a href="https://github.com/serezhka/java-airplay">java-airplay</a> library, and its licence ships with the project.</p>
+          <div class="tags"><span>Java</span><span>Android TV</span><span>Media3</span><span>mDNS</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="block" id="ai" aria-labelledby="ai-h">
+      <div class="sec-head">
+        <div class="mono">AI-assisted development</div>
+        <h2 id="ai-h">How I work with Claude Code</h2>
+        <p>I treat it as a fast pair, not a code printer. The speed comes from not having to leave the problem to look something up. The judgement still has to be mine.</p>
+      </div>
+      <ul class="practice">
+        <li>
+          <h3>Architecture first</h3>
+          <p>Decisions get written down where the next session will read them. Tally's Siri commands, widget and Control Center controls all sit on one App Intents layer instead of three separate ones.</p>
+        </li>
+        <li>
+          <h3>Debugging on real devices</h3>
+          <p>A Siri command worked unlocked and failed on a locked phone. The cause was biometric authentication asked for from the wrong layer. The fix was the OS-level authentication policy, not a retry.</p>
+        </li>
+        <li>
+          <h3>Tests where they earn it</h3>
+          <p>Two of Chalkline's tests are regressions for bugs found by driving the app, and Afterwards checks that its store product ID cannot drift from the StoreKit configuration.</p>
+        </li>
+        <li>
+          <h3>Shipping is part of the job</h3>
+          <p>TestFlight pipelines, App Review notes, privacy and support pages, and the rejections that come from missing a small rule. The release work is in the repository, next to the code.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="block" id="fintech" aria-labelledby="fin-h">
+      <div class="sec-head">
+        <div class="mono">Before 2026</div>
+        <h2 id="fin-h">Mobile banking and payments</h2>
+        <p>Years of building apps where reliability, security and API integration matter more than anything else on the screen.</p>
+      </div>
+      <div class="twocol">
+        <div>
+          <h3>Products</h3>
+          <div class="work"><strong>FriMi</strong><p>A digital financial platform. I started as a developer and later led the team, working on APIs, third-party libraries, mobile security and user experience.</p></div>
+          <div class="work"><strong>FriMi Merchant</strong><p>The merchant-facing side: financial apps and mobile payments for businesses.</p></div>
+          <div class="work"><strong>DFCC Pay</strong><p>Mobile payments for a banking customer.</p></div>
+          <div class="work"><strong>BML MobilePay</strong><p>Mobile payment technology in an international banking environment.</p></div>
+        </div>
+        <div>
+          <h3>Awards</h3>
+          <div class="award"><span class="mono">2021</span><div>AIA Sri Lanka Hackathon Challenge, Winner<span class="role-note">Team lead on an e-KYC solution</span></div></div>
+          <div class="award"><span class="mono">2021</span><div>NDB Neos, NBQSA, Gold Award<span class="role-note">Component lead</span></div></div>
+          <div class="award"><span class="mono">2016</span><div>EPIC Mobile Wallet Platform, NBQSA, Gold Award<span class="role-note">Developer</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="experience" aria-labelledby="exp-h">
+      <div class="sec-head">
+        <div class="mono">Career</div>
+        <h2 id="exp-h">Experience and education</h2>
+      </div>
+      <div class="twocol">
+        <div>
+          <h3>Work</h3>
+          <div class="role"><strong>MarvelStacks</strong><span class="mono">iOS Developer, then Lead iOS Developer &middot; current</span><p>Mobile development, REST API integration, technical prototyping and technology scoping.</p></div>
+          <div class="role"><strong>EPIC Lanka</strong><span class="mono">Software Engineer to Associate Technical Lead &middot; 6+ years</span><p>Built Android and iOS apps for financial and enterprise clients, then led teams on iOS, Android and Flutter. Mentored developers, interviewed candidates, fixed security issues, supported tender submissions and helped deliver major fintech products.</p></div>
+          <div class="role"><strong>Axienta</strong><span class="mono">First engineering role</span><p>Hybrid apps with PhoneGap and Cordova, plus Android and iOS. Databases on SQL Server, MySQL and Oracle.</p></div>
+        </div>
+        <div>
+          <h3>Education</h3>
+          <div class="role"><strong>MSc Financial Technology</strong><span class="mono">University of Gloucestershire &middot; 2023</span><p>Blockchain, smart contracts, Solidity, Python and data analysis with Pandas, NumPy, Matplotlib and SciPy.</p></div>
+          <div class="role"><strong>Postgraduate Diploma in Computer Science</strong><span class="mono">University of Colombo School of Computing</span><p>Data analytics, machine learning, advanced software engineering and algorithms.</p></div>
+          <div class="role"><strong>BSc Information Technology</strong><span class="mono">SLIIT</span><p>Software engineering, object-oriented programming, mobile development and REST APIs.</p></div>
+          <div class="role"><strong>Professional training</strong><span class="mono">CP-JCPA / Agile Great &middot; ITIL Foundation</span><p>JIRA administration, workflows, automation and Agile adoption, plus IT service management.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="skills" aria-labelledby="skills-h">
+      <div class="sec-head">
+        <div class="mono">Toolbox</div>
+        <h2 id="skills-h">Skills</h2>
+        <p>Strongest in the Apple ecosystem, comfortable across Android and the backend.</p>
+      </div>
+      <div class="skills">
+        <div>
+          <h3>iOS</h3>
+          <ul><li>Swift, Objective-C</li><li>SwiftUI, UIKit, SwiftData</li><li>Core Data, Realm, CloudKit</li><li>App Intents, WidgetKit, StoreKit 2</li><li>Core Animation, MapKit</li><li>MVVM / MVC</li><li>Alamofire, CocoaPods, Firebase</li></ul>
+        </div>
+        <div>
+          <h3>Android and cross-platform</h3>
+          <ul><li>Kotlin, Java</li><li>Android Studio</li><li>Flutter</li><li>React Native</li><li>PhoneGap / Cordova</li></ul>
+        </div>
+        <div>
+          <h3>Backend and data</h3>
+          <ul><li>REST APIs</li><li>Python, Flask</li><li>JavaScript, HTML / CSS</li><li>SQL, MySQL, SQL Server, Oracle</li><li>Git, GitLab, Bitbucket</li></ul>
+        </div>
+        <div>
+          <h3>Fintech and integration</h3>
+          <ul><li>Mobile application security</li><li>Third-party SDK integration</li><li>ISO 8583</li><li>HL7, Mirth Connect, Rhapsody</li><li>Blockchain, Solidity</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="contact" aria-labelledby="contact-h">
+      <div class="contact">
+        <div>
+          <h2 id="contact-h">Let's build something.</h2>
+          <p>I want to meet developers, founders, designers and anyone trying new ways of making products. I am open to collaborating on interesting projects, open-source and community work, and to sharing what I have learned about mobile, fintech and AI-assisted development.</p>
+        </div>
+        <ul class="reach">
+          <li><span class="mono">LinkedIn</span><a href="https://www.linkedin.com/in/kasunranganamw">linkedin.com/in/kasunranganamw</a></li>
+          <li><span class="mono">GitHub</span><a href="https://github.com/RanovaLabs">github.com/RanovaLabs</a></li>
+          <li><span class="mono">Studio</span><span>Ranova Labs</span></li>
+          <li><span class="mono">Based in</span><span>Cheltenham, UK</span></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 Kasun Manimel Wadu</span>
+    <span>Built with Claude Code</span>
+  </footer>
+</div>
+
+</body>
+</html>
